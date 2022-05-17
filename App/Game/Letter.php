@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Game;
 
 class Letter
@@ -7,7 +9,7 @@ class Letter
     public string $letter;
     public int $position;
 
-    public function __construct($letter,$position)
+    public function __construct($letter, $position)
     {
         $this->letter = $letter;
         $this->position = $position;
@@ -17,10 +19,11 @@ class Letter
     {
         $tabWord = $word->getTabOfLetters();
         foreach ($tabWord as $value) {
-            if ($this->getLetter() == $value->getLetter()) {
+            if ($this->getLetter() === $value->getLetter()) {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -28,10 +31,11 @@ class Letter
     {
         $tabWord = $word->getTabOfLetters();
         foreach ($tabWord as $key => $value) {
-            if ($this->getLetter() == $value->getLetter() && $this->position == $key) {
+            if ($this->getLetter() === $value->getLetter() && $this->position === $key) {
                 return true;
             }
         }
+
         return false;
     }
 

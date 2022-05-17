@@ -1,11 +1,14 @@
 <?php
+
 declare(strict_types=1);
+
 namespace App\Data;
 
 class GameData implements GameInterface
 {
-    public function isGameStarted(): bool{
-        return (isset($_COOKIE['gameData']) && json_decode($_COOKIE['gameData'])->status === 'PLAYING');
+    public function isGameStarted(): bool
+    {
+        return isset($_COOKIE['gameData']) && 'PLAYING' === json_decode($_COOKIE['gameData'])->status;
     }
 
     public function getGameData(): string

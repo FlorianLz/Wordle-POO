@@ -72,47 +72,48 @@
 </head>
 <body>
     <h1>Bienvenue sur le jeu du Wordle !</h1>
-    <?php if ($wordle->essais_restants > 0 && $wordle->status === "PLAYING"){ ?>
-    <p>Il te reste encore <?= $wordle->essais_restants ?> tentatives</p>
+    <?php if ($wordle->essais_restants > 0 && 'PLAYING' === $wordle->status) { ?>
+    <p>Il te reste encore <?php echo $wordle->essais_restants; ?> tentatives</p>
     <?php } ?>
 
-    <?php if ($wordle->essais_restants == 0 && $wordle->status === "LOSE"){ ?>
+    <?php if (0 == $wordle->essais_restants && 'LOSE' === $wordle->status) { ?>
         <p>Vous avez perdu !</p>
-        <p>Le mot a trouver était : <?= $wordle->word ?></p>
+        <p>Le mot a trouver était : <?php echo $wordle->word; ?></p>
     <?php } ?>
-    <?php if ($wordle->status === "WIN"){ ?>
+    <?php if ('WIN' === $wordle->status) { ?>
         <p>Vous avez gagné !</p>
-        <p>Le mot a trouver était bien : <?= $wordle->word ?></p>
+        <p>Le mot a trouver était bien : <?php echo $wordle->word; ?></p>
     <?php } ?>
 
     <?php
-    if(count($wordle->tentatives)>0){
-        if($wordle->status === "WIN"){
-            if(count($wordle->tentatives) > 1 ){
-                echo '<h2>Trouvé en '.count($wordle->tentatives). ' essais</h2>';
-            }else{
-                echo '<h2>Trouvé en '.count($wordle->tentatives). ' essai</h2>';
+    if (count($wordle->tentatives) > 0) {
+        if ('WIN' === $wordle->status) {
+            if (count($wordle->tentatives) > 1) {
+                echo '<h2>Trouvé en '.count($wordle->tentatives).' essais</h2>';
+            } else {
+                echo '<h2>Trouvé en '.count($wordle->tentatives).' essai</h2>';
             }
-        }else{
+        } else {
             echo '<h2>Tes derniers essais :</h2>';
         }
 
-    foreach ($wordle->tentatives as $tentative){ ?>
+        foreach ($wordle->tentatives as $tentative) { ?>
         <div class="proposition">
-            <?php  for ($i=0; $i < $wordle->word_count; $i++){
-                echo '<span class="'.$tentative[$i]->status.'">'.$tentative[$i]->letter.'</span>';
-                 ?>
-            <?php } ?>
+            <?php for ($i = 0; $i < $wordle->word_count; ++$i) {
+            echo '<span class="'.$tentative[$i]->status.'">'.$tentative[$i]->letter.'</span>'; ?>
+            <?php
+        } ?>
         </div>
-    <?php } } ?>
-<?php if($wordle->essais_restants > 0 && $wordle->status === "PLAYING"){ ?>
+    <?php }
+    } ?>
+<?php if ($wordle->essais_restants > 0 && 'PLAYING' === $wordle->status) { ?>
    <h2>Nouvelle tentative :</h2>
         <form method="GET">
             <div>
             <?php
             foreach ($wordle->tabLettres as $key => $letter) {
                 ?>
-                <input type="text" maxlength="1" name="letter<?= $key ?>">
+                <input type="text" maxlength="1" name="letter<?php echo $key; ?>">
                 <?php
             }
             ?>
