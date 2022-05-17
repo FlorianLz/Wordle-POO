@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Game;
 
 class Word
@@ -18,16 +20,16 @@ class Word
 
     public function getLength()
     {
-        return strlen($this->word);
+        return \strlen($this->word);
     }
 
     public function getTabOfLetters()
     {
         $letters = [];
-        foreach (str_split($this->word) as $key=>$letter) {
-            $letters[] = new Letter($letter,$key);
+        foreach (str_split($this->word) as $key => $letter) {
+            $letters[] = new Letter($letter, $key);
         }
+
         return $letters;
     }
-
 }
